@@ -404,8 +404,7 @@ function Dashboard() {
                 <YAxis stroke="oklch(0.72 0.02 255)" fontSize={11} />
                 <Tooltip contentStyle={tooltipStyle} />
                 <Legend wrapperStyle={{ fontSize: 12 }} />
-                <Area type="monotone" dataKey="arr" name="Arrivées" stroke="var(--color-chart-1)" strokeWidth={2} fill="url(#gArr)"
-                      activeDot={{ r: 6, cursor: "pointer", onClick: (_: unknown, p: { payload?: { name: string } }) => p.payload && toggle("mois" as never, p.payload.name) }} />
+                <Area type="monotone" dataKey="arr" name="Arrivées" stroke="var(--color-chart-1)" strokeWidth={2} fill="url(#gArr)" />
                 <Area type="monotone" dataKey="sortis" name="Sorties" stroke="var(--color-chart-3)" strokeWidth={2} fill="url(#gLivr)" />
               </AreaChart>
             </ResponsiveContainer>
