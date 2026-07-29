@@ -126,7 +126,7 @@ function Kpi({ icon: Icon, label, value, sub, tone = "primary" }: {
 }
 
 function Panel({ title, subtitle, children, className = "", hint }: {
-  title: string; subtitle?: string; children: React.ReactNode; className?: string; hint?: string;
+  title: React.ReactNode; subtitle?: string; children: React.ReactNode; className?: string; hint?: string;
 }) {
   return (
     <Card className={`border-border/60 bg-surface-gradient shadow-elegant ${className}`}>
