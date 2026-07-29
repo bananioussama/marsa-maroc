@@ -612,14 +612,14 @@ function Dashboard() {
           <Panel title="Année du véhicule" hint="Cliquez pour filtrer">
             <div className="h-56">
               <ResponsiveContainer width="100%" height="100%">
-                <LineChart data={anneeData} margin={{ top: 8, right: 12, left: -20, bottom: 0 }}>
+                <LineChart data={anneeData} margin={{ top: 8, right: 12, left: -20, bottom: 0 }}
+                           onClick={(e: { activeLabel?: string } | null) => e?.activeLabel && toggle("annee", e.activeLabel)}>
                   <CartesianGrid strokeDasharray="3 3" stroke="oklch(0.32 0.03 260 / 0.4)" />
                   <XAxis dataKey="name" stroke="oklch(0.72 0.02 255)" fontSize={11} />
                   <YAxis stroke="oklch(0.72 0.02 255)" fontSize={11} />
-                  <Tooltip contentStyle={tooltipStyle} />
+                  <Tooltip contentStyle={tooltipStyle} cursor={{ stroke: "oklch(0.72 0.02 255 / 0.4)" }} />
                   <Line type="monotone" dataKey="value" stroke="var(--color-chart-1)" strokeWidth={2}
-                        dot={{ r: 4, cursor: "pointer" }} activeDot={{ r: 6, cursor: "pointer",
-                          onClick: (_: unknown, p: { payload?: { name: string } }) => p.payload && toggle("annee", p.payload.name) }} />
+                        dot={{ r: 4, cursor: "pointer" }} activeDot={{ r: 6, cursor: "pointer" }} />
                 </LineChart>
               </ResponsiveContainer>
             </div>
