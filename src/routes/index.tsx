@@ -524,7 +524,7 @@ function Dashboard() {
 
         {/* Bars small */}
         <section className="grid gap-4 lg:grid-cols-3">
-          <Panel title={<><Factory className="mr-1 inline h-3.5 w-3.5" />Pays d'origine</> as unknown as string}>
+          <Panel title={<span className="inline-flex items-center gap-1.5"><Factory className="h-3.5 w-3.5" />Pays d'origine</span>}>
             <div className="h-56">
               <ResponsiveContainer width="100%" height="100%">
                 <BarChart data={paysData} margin={{ top: 4, right: 12, left: -20, bottom: 0 }}>
@@ -541,7 +541,7 @@ function Dashboard() {
               </ResponsiveContainer>
             </div>
           </Panel>
-          <Panel title={<><MapPin className="mr-1 inline h-3.5 w-3.5" />Destinations</> as unknown as string}>
+          <Panel title={<span className="inline-flex items-center gap-1.5"><MapPin className="h-3.5 w-3.5" />Destinations</span>}>
             <div className="h-56">
               <ResponsiveContainer width="100%" height="100%">
                 <BarChart data={destData} margin={{ top: 4, right: 12, left: -20, bottom: 0 }}>
