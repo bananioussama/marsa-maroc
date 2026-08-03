@@ -189,6 +189,8 @@ function Dashboard() {
   const [dicts, setDicts] = useState<Raw["dicts"] | null>(null);
   const [f, setF] = useState<Filters>(EMPTY);
   const [page, setPage] = useState(1);
+  const [downloading, setDownloading] = useState(false);
+  const fetchSourceFiles = useServerFn(getProjectSourceFiles);
 
   useEffect(() => {
     fetch("/data/vehicles.json").then((r) => r.json()).then((raw: Raw) => {
