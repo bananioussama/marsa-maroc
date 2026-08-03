@@ -403,6 +403,18 @@ Généré le : ${new Date().toLocaleString("fr-FR")}
               Cliquez sur n'importe quelle barre, secteur ou point du graphique pour filtrer instantanément le tableau de bord.
             </p>
           </div>
+          <Button
+            onClick={handleDownloadProject}
+            disabled={downloading}
+            className="h-10 gap-2 bg-primary/90 text-primary-foreground shadow-glow hover:bg-primary"
+          >
+            {downloading ? (
+              <Anchor className="h-4 w-4 animate-spin" />
+            ) : (
+              <Download className="h-4 w-4" />
+            )}
+            {downloading ? "Préparation…" : "Télécharger le projet"}
+          </Button>
         </div>
 
         {/* Filters */}
