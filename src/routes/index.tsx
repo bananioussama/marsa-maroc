@@ -1,8 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useServerFn } from "@tanstack/react-start";
 import { useEffect, useMemo, useState } from "react";
 import {
   Ship, Car, PackageCheck, Warehouse, Clock, TrendingUp, Filter, Search,
-  Anchor, X, ShieldAlert, Wrench, MapPin, Factory,
+  Anchor, X, ShieldAlert, Wrench, MapPin, Factory, Download,
 } from "lucide-react";
 import {
   BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid,
@@ -15,6 +16,8 @@ import { Button } from "@/components/ui/button";
 import {
   Select, SelectContent, SelectItem, SelectTrigger, SelectValue,
 } from "@/components/ui/select";
+import { getProjectSourceFiles } from "@/lib/download-project.functions";
+import JSZip from "jszip";
 
 export const Route = createFileRoute("/")({
   component: Dashboard,
