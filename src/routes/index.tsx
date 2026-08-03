@@ -1,8 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useServerFn } from "@tanstack/react-start";
 import { useEffect, useMemo, useState } from "react";
 import {
   Ship, Car, PackageCheck, Warehouse, Clock, TrendingUp, Filter, Search,
-  Anchor, X, ShieldAlert, Wrench, MapPin, Factory,
+  Anchor, X, ShieldAlert, Wrench, MapPin, Factory, Download,
 } from "lucide-react";
 import {
   BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid,
@@ -15,6 +16,8 @@ import { Button } from "@/components/ui/button";
 import {
   Select, SelectContent, SelectItem, SelectTrigger, SelectValue,
 } from "@/components/ui/select";
+import { getProjectSourceFiles } from "@/lib/download-project.functions";
+import JSZip from "jszip";
 
 export const Route = createFileRoute("/")({
   component: Dashboard,
@@ -186,6 +189,8 @@ function Dashboard() {
   const [dicts, setDicts] = useState<Raw["dicts"] | null>(null);
   const [f, setF] = useState<Filters>(EMPTY);
   const [page, setPage] = useState(1);
+  const [downloading, setDownloading] = useState(false);
+  const fetchSourceFiles = useServerFn(getProjectSourceFiles);
 
   useEffect(() => {
     fetch("/data/vehicles.json").then((r) => r.json()).then((raw: Raw) => {
@@ -220,6 +225,80 @@ function Dashboard() {
   // Toggle: click a chart segment → set filter to that value, click again → clear
   const toggle = (key: keyof Filters, value: string) => {
     setF((prev) => ({ ...prev, [key]: prev[key] === value ? "all" : value }));
+  };
+
+  const handleDownloadProject = async () => {
+    try {
+      setDownloading(true);
+      const { files, included, errors } = await fetchSourceFiles();
+      const zip = new JSZip();
+
+      // Source files
+      for (const [path, content] of Object.entries(files)) {
+        zip.file(path, content);
+      }
+
+      // Data file
+      try {
+        const dataRes = await fetch("/data/vehicles.json");
+        if (dataRes.ok) {
+          const dataBlob = await dataRes.blob();
+          zip.file("public/data/vehicles.json", dataBlob);
+        }
+      } catch {
+        // data file optional
+      }
+
+      // README guide
+      const readme = `# Marsa Maroc — Voiturier Dashboard
+
+Archive générée depuis le tableau de bord Lovable.
+
+## Fichiers inclus
+- ${included.join("\n- ")}
+- public/data/vehicles.json (données compressées du parc)
+
+## Prérequis
+- Node.js 20+
+- Bun ou npm
+
+## Lancer le projet
+\`\`\`bash
+bun install
+bun run dev
+# ou
+npm install
+npm run dev
+\`\`\`
+
+## Note
+Pour exporter le projet complet à tout moment :
+1. Dans Lovable, ouvre Project Settings (icône ⚙️ en haut à droite).
+2. Va dans l’onglet GitHub et connecte ton compte.
+3. Crée le repository — tout le code sera poussé automatiquement.
+4. Sur ton ordinateur : \`git clone <url-du-repo>\`.
+
+---
+Généré le : ${new Date().toLocaleString("fr-FR")}
+`;
+      zip.file("README-DOWNLOAD.md", readme);
+
+      const blob = await zip.generateAsync({ type: "blob" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `marsa-maroc-dashboard-${new Date().toISOString().slice(0, 10)}.zip`;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+
+      if (errors.length) {
+        console.warn("Fichiers non inclus :", errors);
+      }
+    } finally {
+      setDownloading(false);
+    }
   };
 
   const kpis = useMemo(() => {
@@ -324,6 +403,18 @@ function Dashboard() {
               Cliquez sur n'importe quelle barre, secteur ou point du graphique pour filtrer instantanément le tableau de bord.
             </p>
           </div>
+          <Button
+            onClick={handleDownloadProject}
+            disabled={downloading}
+            className="h-10 gap-2 bg-primary/90 text-primary-foreground shadow-glow hover:bg-primary"
+          >
+            {downloading ? (
+              <Anchor className="h-4 w-4 animate-spin" />
+            ) : (
+              <Download className="h-4 w-4" />
+            )}
+            {downloading ? "Préparation…" : "Télécharger le projet"}
+          </Button>
         </div>
 
         {/* Filters */}
