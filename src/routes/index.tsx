@@ -227,6 +227,80 @@ function Dashboard() {
     setF((prev) => ({ ...prev, [key]: prev[key] === value ? "all" : value }));
   };
 
+  const handleDownloadProject = async () => {
+    try {
+      setDownloading(true);
+      const { files, included, errors } = await fetchSourceFiles();
+      const zip = new JSZip();
+
+      // Source files
+      for (const [path, content] of Object.entries(files)) {
+        zip.file(path, content);
+      }
+
+      // Data file
+      try {
+        const dataRes = await fetch("/data/vehicles.json");
+        if (dataRes.ok) {
+          const dataBlob = await dataRes.blob();
+          zip.file("public/data/vehicles.json", dataBlob);
+        }
+      } catch {
+        // data file optional
+      }
+
+      // README guide
+      const readme = `# Marsa Maroc — Voiturier Dashboard
+
+Archive générée depuis le tableau de bord Lovable.
+
+## Fichiers inclus
+- ${included.join("\n- ")}
+- public/data/vehicles.json (données compressées du parc)
+
+## Prérequis
+- Node.js 20+
+- Bun ou npm
+
+## Lancer le projet
+\`\`\`bash
+bun install
+bun run dev
+# ou
+npm install
+npm run dev
+\`\`\`
+
+## Note
+Pour exporter le projet complet à tout moment :
+1. Dans Lovable, ouvre Project Settings (icône ⚙️ en haut à droite).
+2. Va dans l’onglet GitHub et connecte ton compte.
+3. Crée le repository — tout le code sera poussé automatiquement.
+4. Sur ton ordinateur : \`git clone <url-du-repo>\`.
+
+---
+Généré le : ${new Date().toLocaleString("fr-FR")}
+`;
+      zip.file("README-DOWNLOAD.md", readme);
+
+      const blob = await zip.generateAsync({ type: "blob" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `marsa-maroc-dashboard-${new Date().toISOString().slice(0, 10)}.zip`;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+
+      if (errors.length) {
+        console.warn("Fichiers non inclus :", errors);
+      }
+    } finally {
+      setDownloading(false);
+    }
+  };
+
   const kpis = useMemo(() => {
     const total = filtered.length;
     const enStock = filtered.filter((v) => v.statut === "En Stock").length;
