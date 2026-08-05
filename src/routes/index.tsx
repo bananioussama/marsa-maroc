@@ -1,9 +1,9 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
 import { useEffect, useMemo, useState } from "react";
 import {
   Ship, Car, PackageCheck, Warehouse, Clock, TrendingUp, Filter, Search,
-  Anchor, X, ShieldAlert, Wrench, MapPin, Factory, Download,
+  Anchor, X, ShieldAlert, Wrench, MapPin, Factory, Download, Brain,
 } from "lucide-react";
 import {
   BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid,
@@ -403,18 +403,30 @@ Généré le : ${new Date().toLocaleString("fr-FR")}
               Cliquez sur n'importe quelle barre, secteur ou point du graphique pour filtrer instantanément le tableau de bord.
             </p>
           </div>
-          <Button
-            onClick={handleDownloadProject}
-            disabled={downloading}
-            className="h-10 gap-2 bg-primary/90 text-primary-foreground shadow-glow hover:bg-primary"
-          >
-            {downloading ? (
-              <Anchor className="h-4 w-4 animate-spin" />
-            ) : (
-              <Download className="h-4 w-4" />
-            )}
-            {downloading ? "Préparation…" : "Télécharger le projet"}
-          </Button>
+          <div className="flex flex-wrap items-center gap-2">
+            <Button
+              asChild
+              className="h-10 gap-2 bg-primary text-primary-foreground shadow-glow hover:bg-primary/90"
+            >
+              <Link to="/assistant">
+                <Brain className="h-4 w-4" />
+                Agent IA prédictif
+              </Link>
+            </Button>
+            <Button
+              onClick={handleDownloadProject}
+              disabled={downloading}
+              variant="outline"
+              className="h-10 gap-2"
+            >
+              {downloading ? (
+                <Anchor className="h-4 w-4 animate-spin" />
+              ) : (
+                <Download className="h-4 w-4" />
+              )}
+              {downloading ? "Préparation…" : "Télécharger le projet"}
+            </Button>
+          </div>
         </div>
 
         {/* Filters */}
