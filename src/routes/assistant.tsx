@@ -265,21 +265,13 @@ function AssistantPage() {
                     />
                     <Area
                       type="monotone"
-                      dataKey="haut"
-                      name="Borne haute"
+                      dataKey="bande"
+                      name="Intervalle"
                       stroke="none"
-                      fill="var(--color-primary)"
-                      fillOpacity={0.12}
+                      fill="var(--color-chart-3, #f59e0b)"
+                      fillOpacity={0.15}
                       connectNulls
-                    />
-                    <Area
-                      type="monotone"
-                      dataKey="bas"
-                      name="Borne basse"
-                      stroke="none"
-                      fill="var(--color-background)"
-                      fillOpacity={0.9}
-                      connectNulls
+                      isAnimationActive={false}
                     />
                     <Area
                       type="monotone"
