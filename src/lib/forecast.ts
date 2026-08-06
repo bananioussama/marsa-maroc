@@ -6,6 +6,7 @@ export type MonthPoint = {
   prevision?: number;
   bas?: number;
   haut?: number;
+  bande?: [number, number];
 };
 
 /**
@@ -109,6 +110,7 @@ export function buildForecast(horizon = 6) {
       prevision: value,
       bas: Math.max(0, value - margin),
       haut: value + margin,
+      bande: [Math.max(0, value - margin), value + margin] as [number, number],
     });
   }
 
@@ -130,7 +132,12 @@ export function buildForecast(horizon = 6) {
       ...history.map((h, i) => ({
         ...h,
         ...(i === history.length - 1
-          ? { prevision: lastValue, bas: lastValue, haut: lastValue }
+          ? {
+              prevision: lastValue,
+              bas: lastValue,
+              haut: lastValue,
+              bande: [lastValue, lastValue] as [number, number],
+            }
           : {}),
       })),
       ...forecast,
