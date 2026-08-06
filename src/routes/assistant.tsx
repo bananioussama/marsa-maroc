@@ -258,10 +258,14 @@ function AssistantPage() {
                       }}
                       labelStyle={{ color: "var(--color-popover-foreground)", fontWeight: 600 }}
                       itemStyle={{ color: "var(--color-popover-foreground)" }}
-                      formatter={(value: number, name: string) => [
-                        Math.round(value).toLocaleString("fr-FR"),
-                        name,
-                      ]}
+                      formatter={(value: number | number[], name: string) =>
+                        Array.isArray(value)
+                          ? [
+                              `${Math.round(value[0]).toLocaleString("fr-FR")} – ${Math.round(value[1]).toLocaleString("fr-FR")}`,
+                              name,
+                            ]
+                          : [Math.round(value).toLocaleString("fr-FR"), name]
+                      }
                     />
                     <Area
                       type="monotone"
