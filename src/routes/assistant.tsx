@@ -6,7 +6,7 @@ import {
   ArrowLeft, Bot, Brain, RefreshCw, Sparkle, TrendingUp,
 } from "lucide-react";
 import {
-  Area, AreaChart, CartesianGrid, Line, ResponsiveContainer, Tooltip, XAxis, YAxis,
+  Area, CartesianGrid, ComposedChart, Line, ResponsiveContainer, Tooltip, XAxis, YAxis,
 } from "recharts";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
