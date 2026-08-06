@@ -508,7 +508,7 @@ Généré le : ${new Date().toLocaleString("fr-FR")}
                 <CartesianGrid strokeDasharray="3 3" stroke="oklch(0.32 0.03 260 / 0.4)" />
                 <XAxis dataKey="name" stroke="oklch(0.72 0.02 255)" fontSize={11} />
                 <YAxis stroke="oklch(0.72 0.02 255)" fontSize={11} />
-                <Tooltip contentStyle={tooltipStyle} />
+                <Tooltip contentStyle={tooltipStyle} labelStyle={tooltipLabelStyle} itemStyle={tooltipItemStyle} />
                 <Legend wrapperStyle={{ fontSize: 12 }} />
                 <Area type="monotone" dataKey="arr" name="Arrivées" stroke="var(--color-chart-1)" strokeWidth={2} fill="url(#gArr)" />
                 <Area type="monotone" dataKey="sortis" name="Sorties" stroke="var(--color-chart-3)" strokeWidth={2} fill="url(#gLivr)" />
@@ -530,7 +530,7 @@ Généré le : ${new Date().toLocaleString("fr-FR")}
                             stroke={f.statut === d.name ? "var(--color-foreground)" : "transparent"} strokeWidth={2} />
                     ))}
                   </Pie>
-                  <Tooltip contentStyle={tooltipStyle} />
+                  <Tooltip contentStyle={tooltipStyle} labelStyle={tooltipLabelStyle} itemStyle={tooltipItemStyle} />
                   <Legend wrapperStyle={{ fontSize: 11 }} />
                 </PieChart>
               </ResponsiveContainer>
@@ -547,7 +547,7 @@ Généré le : ${new Date().toLocaleString("fr-FR")}
                             stroke={f.carburant === d.name ? "var(--color-foreground)" : "transparent"} strokeWidth={2} />
                     ))}
                   </Pie>
-                  <Tooltip contentStyle={tooltipStyle} />
+                  <Tooltip contentStyle={tooltipStyle} labelStyle={tooltipLabelStyle} itemStyle={tooltipItemStyle} />
                   <Legend wrapperStyle={{ fontSize: 11 }} />
                 </PieChart>
               </ResponsiveContainer>
@@ -564,7 +564,7 @@ Généré le : ${new Date().toLocaleString("fr-FR")}
                             stroke={f.type === d.name ? "var(--color-foreground)" : "transparent"} strokeWidth={2} />
                     ))}
                   </Pie>
-                  <Tooltip contentStyle={tooltipStyle} />
+                  <Tooltip contentStyle={tooltipStyle} labelStyle={tooltipLabelStyle} itemStyle={tooltipItemStyle} />
                   <Legend wrapperStyle={{ fontSize: 11 }} />
                 </PieChart>
               </ResponsiveContainer>
@@ -581,7 +581,7 @@ Généré le : ${new Date().toLocaleString("fr-FR")}
                             stroke={f.etat === d.name ? "var(--color-foreground)" : "transparent"} strokeWidth={2} />
                     ))}
                   </Pie>
-                  <Tooltip contentStyle={tooltipStyle} />
+                  <Tooltip contentStyle={tooltipStyle} labelStyle={tooltipLabelStyle} itemStyle={tooltipItemStyle} />
                   <Legend wrapperStyle={{ fontSize: 11 }} />
                 </PieChart>
               </ResponsiveContainer>
@@ -598,7 +598,7 @@ Généré le : ${new Date().toLocaleString("fr-FR")}
                   <CartesianGrid strokeDasharray="3 3" stroke="oklch(0.32 0.03 260 / 0.4)" />
                   <XAxis type="number" stroke="oklch(0.72 0.02 255)" fontSize={11} />
                   <YAxis type="category" dataKey="name" stroke="oklch(0.72 0.02 255)" fontSize={11} width={80} />
-                  <Tooltip contentStyle={tooltipStyle} cursor={{ fill: "oklch(0.3 0.04 260 / 0.3)" }} />
+                  <Tooltip contentStyle={tooltipStyle} labelStyle={tooltipLabelStyle} itemStyle={tooltipItemStyle} cursor={{ fill: "oklch(0.3 0.04 260 / 0.3)" }} />
                   <Bar dataKey="value" radius={[0, 8, 8, 0]} onClick={(d: { name: string }) => toggle("modele", d.name)} cursor="pointer">
                     {modelData.map((d, i) => (
                       <Cell key={i} fill={f.modele === d.name ? "var(--color-primary)" : "var(--color-chart-1)"} />
@@ -616,7 +616,7 @@ Généré le : ${new Date().toLocaleString("fr-FR")}
                   <CartesianGrid strokeDasharray="3 3" stroke="oklch(0.32 0.03 260 / 0.4)" />
                   <XAxis dataKey="name" stroke="oklch(0.72 0.02 255)" fontSize={11} />
                   <YAxis stroke="oklch(0.72 0.02 255)" fontSize={11} />
-                  <Tooltip contentStyle={tooltipStyle} cursor={{ fill: "oklch(0.3 0.04 260 / 0.3)" }} />
+                  <Tooltip contentStyle={tooltipStyle} labelStyle={tooltipLabelStyle} itemStyle={tooltipItemStyle} cursor={{ fill: "oklch(0.3 0.04 260 / 0.3)" }} />
                   <Bar dataKey="value" radius={[8, 8, 0, 0]} onClick={(d: { name: string }) => toggle("zone", d.name)} cursor="pointer">
                     {zoneData.map((d, i) => (
                       <Cell key={i} fill={f.zone === d.name ? "var(--color-primary)" : "var(--color-chart-2)"} />
@@ -637,7 +637,7 @@ Généré le : ${new Date().toLocaleString("fr-FR")}
                   <CartesianGrid strokeDasharray="3 3" stroke="oklch(0.32 0.03 260 / 0.4)" />
                   <XAxis dataKey="name" stroke="oklch(0.72 0.02 255)" fontSize={11} />
                   <YAxis stroke="oklch(0.72 0.02 255)" fontSize={11} />
-                  <Tooltip contentStyle={tooltipStyle} cursor={{ fill: "oklch(0.3 0.04 260 / 0.3)" }} />
+                  <Tooltip contentStyle={tooltipStyle} labelStyle={tooltipLabelStyle} itemStyle={tooltipItemStyle} cursor={{ fill: "oklch(0.3 0.04 260 / 0.3)" }} />
                   <Bar dataKey="value" radius={[8, 8, 0, 0]} onClick={(d: { name: string }) => toggle("pays", d.name)} cursor="pointer">
                     {paysData.map((d, i) => (
                       <Cell key={i} fill={f.pays === d.name ? "var(--color-primary)" : "var(--color-chart-4)"} />
@@ -654,7 +654,7 @@ Généré le : ${new Date().toLocaleString("fr-FR")}
                   <CartesianGrid strokeDasharray="3 3" stroke="oklch(0.32 0.03 260 / 0.4)" />
                   <XAxis dataKey="name" stroke="oklch(0.72 0.02 255)" fontSize={11} />
                   <YAxis stroke="oklch(0.72 0.02 255)" fontSize={11} />
-                  <Tooltip contentStyle={tooltipStyle} cursor={{ fill: "oklch(0.3 0.04 260 / 0.3)" }} />
+                  <Tooltip contentStyle={tooltipStyle} labelStyle={tooltipLabelStyle} itemStyle={tooltipItemStyle} cursor={{ fill: "oklch(0.3 0.04 260 / 0.3)" }} />
                   <Bar dataKey="value" radius={[8, 8, 0, 0]} onClick={(d: { name: string }) => toggle("destination", d.name)} cursor="pointer">
                     {destData.map((d, i) => (
                       <Cell key={i} fill={f.destination === d.name ? "var(--color-primary)" : "var(--color-chart-5)"} />
@@ -671,7 +671,7 @@ Généré le : ${new Date().toLocaleString("fr-FR")}
                   <CartesianGrid strokeDasharray="3 3" stroke="oklch(0.32 0.03 260 / 0.4)" />
                   <XAxis dataKey="name" stroke="oklch(0.72 0.02 255)" fontSize={11} />
                   <YAxis stroke="oklch(0.72 0.02 255)" fontSize={11} />
-                  <Tooltip contentStyle={tooltipStyle} cursor={{ fill: "oklch(0.3 0.04 260 / 0.3)" }} />
+                  <Tooltip contentStyle={tooltipStyle} labelStyle={tooltipLabelStyle} itemStyle={tooltipItemStyle} cursor={{ fill: "oklch(0.3 0.04 260 / 0.3)" }} />
                   <Bar dataKey="value" radius={[8, 8, 0, 0]} fill="var(--color-chart-6)" onClick={(d: { name: string }) => toggle("zone", d.name)} cursor="pointer" />
                 </BarChart>
               </ResponsiveContainer>
@@ -688,7 +688,7 @@ Généré le : ${new Date().toLocaleString("fr-FR")}
                   <CartesianGrid strokeDasharray="3 3" stroke="oklch(0.32 0.03 260 / 0.4)" />
                   <XAxis dataKey="name" stroke="oklch(0.72 0.02 255)" fontSize={11} />
                   <YAxis stroke="oklch(0.72 0.02 255)" fontSize={11} />
-                  <Tooltip contentStyle={tooltipStyle} cursor={{ fill: "oklch(0.3 0.04 260 / 0.3)" }} />
+                  <Tooltip contentStyle={tooltipStyle} labelStyle={tooltipLabelStyle} itemStyle={tooltipItemStyle} cursor={{ fill: "oklch(0.3 0.04 260 / 0.3)" }} />
                   <Bar dataKey="value" radius={[8, 8, 0, 0]} onClick={(d: { name: string }) => toggle("importateur", d.name)} cursor="pointer">
                     {importData.map((d, i) => (
                       <Cell key={i} fill={f.importateur === d.name ? "var(--color-primary)" : "var(--color-chart-3)"} />
@@ -705,7 +705,7 @@ Généré le : ${new Date().toLocaleString("fr-FR")}
                   <CartesianGrid strokeDasharray="3 3" stroke="oklch(0.32 0.03 260 / 0.4)" />
                   <XAxis dataKey="name" stroke="oklch(0.72 0.02 255)" fontSize={11} />
                   <YAxis stroke="oklch(0.72 0.02 255)" fontSize={11} />
-                  <Tooltip contentStyle={tooltipStyle} cursor={{ fill: "oklch(0.3 0.04 260 / 0.3)" }} />
+                  <Tooltip contentStyle={tooltipStyle} labelStyle={tooltipLabelStyle} itemStyle={tooltipItemStyle} cursor={{ fill: "oklch(0.3 0.04 260 / 0.3)" }} />
                   <Bar dataKey="value" radius={[8, 8, 0, 0]} onClick={(d: { name: string }) => toggle("navire", d.name)} cursor="pointer">
                     {navireData.map((d, i) => (
                       <Cell key={i} fill={f.navire === d.name ? "var(--color-primary)" : "var(--color-chart-2)"} />
@@ -723,7 +723,7 @@ Généré le : ${new Date().toLocaleString("fr-FR")}
                   <CartesianGrid strokeDasharray="3 3" stroke="oklch(0.32 0.03 260 / 0.4)" />
                   <XAxis dataKey="name" stroke="oklch(0.72 0.02 255)" fontSize={11} />
                   <YAxis stroke="oklch(0.72 0.02 255)" fontSize={11} />
-                  <Tooltip contentStyle={tooltipStyle} cursor={{ stroke: "oklch(0.72 0.02 255 / 0.4)" }} />
+                  <Tooltip contentStyle={tooltipStyle} labelStyle={tooltipLabelStyle} itemStyle={tooltipItemStyle} cursor={{ stroke: "oklch(0.72 0.02 255 / 0.4)" }} />
                   <Line type="monotone" dataKey="value" stroke="var(--color-chart-1)" strokeWidth={2}
                         dot={{ r: 4, cursor: "pointer" }} activeDot={{ r: 6, cursor: "pointer" }} />
                 </LineChart>
