@@ -6,7 +6,7 @@ import {
   ArrowLeft, Bot, Brain, RefreshCw, Sparkle, TrendingUp,
 } from "lucide-react";
 import {
-  Area, AreaChart, CartesianGrid, Line, ResponsiveContainer, Tooltip, XAxis, YAxis,
+  Area, CartesianGrid, ComposedChart, Line, ResponsiveContainer, Tooltip, XAxis, YAxis,
 } from "recharts";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -28,13 +28,13 @@ export const Route = createFileRoute("/assistant")({
   component: AssistantPage,
   head: () => ({
     meta: [
-      { title: "Marsa AI — Analyste prédictif du parc véhicules" },
+      { title: "Marsa IA — Analyste prédictif du parc véhicules" },
       {
         name: "description",
         content:
           "Agent IA entraîné sur 50 000 véhicules importés : prévisions du marché, analyses de stock, zones, navires et importateurs.",
       },
-      { property: "og:title", content: "Marsa AI — Analyste prédictif du parc véhicules" },
+      { property: "og:title", content: "Marsa IA — Analyste prédictif du parc véhicules" },
       {
         property: "og:description",
         content: "Posez vos questions à l'IA analyste du terminal voiturier Marsa Maroc.",
@@ -111,7 +111,7 @@ function AssistantPage() {
             </div>
             <div>
               <h1 className="font-display text-lg font-semibold leading-none">
-                Marsa <span className="text-primary">AI</span>
+                Marsa <span className="text-primary">IA</span>
               </h1>
               <p className="mt-1 text-xs text-muted-foreground">
                 Analyste prédictif · entraîné sur {DATASET_SUMMARY.total.toLocaleString("fr-FR")} véhicules
@@ -237,13 +237,13 @@ function AssistantPage() {
                   {forecast.tendance}
                 </Badge>
               </div>
-              <div className="h-48">
+              <div className="h-52">
                 <ResponsiveContainer width="100%" height="100%">
-                  <AreaChart data={forecast.series}>
+                  <ComposedChart data={forecast.series}>
                     <defs>
                       <linearGradient id="fc" x1="0" y1="0" x2="0" y2="1">
-                        <stop offset="0%" stopColor="hsl(var(--primary))" stopOpacity={0.5} />
-                        <stop offset="100%" stopColor="hsl(var(--primary))" stopOpacity={0} />
+                        <stop offset="0%" stopColor="var(--color-primary)" stopOpacity={0.45} />
+                        <stop offset="100%" stopColor="var(--color-primary)" stopOpacity={0} />
                       </linearGradient>
                     </defs>
                     <CartesianGrid strokeDasharray="3 3" opacity={0.15} vertical={false} />
@@ -251,30 +251,52 @@ function AssistantPage() {
                     <YAxis tick={{ fontSize: 10 }} width={38} />
                     <Tooltip
                       contentStyle={{
-                        background: "hsl(var(--card))",
-                        border: "1px solid hsl(var(--border))",
-                        borderRadius: 8,
+                        background: "var(--color-popover)",
+                        border: "1px solid var(--color-border)",
+                        borderRadius: 10,
                         fontSize: 12,
                       }}
+                      labelStyle={{ color: "var(--color-popover-foreground)", fontWeight: 600 }}
+                      itemStyle={{ color: "var(--color-popover-foreground)" }}
+                      formatter={(value: number | number[], name: string) =>
+                        Array.isArray(value)
+                          ? [
+                              `${Math.round(value[0]).toLocaleString("fr-FR")} – ${Math.round(value[1]).toLocaleString("fr-FR")}`,
+                              name,
+                            ]
+                          : [Math.round(value).toLocaleString("fr-FR"), name]
+                      }
+                    />
+                    <Area
+                      type="monotone"
+                      dataKey="bande"
+                      name="Intervalle"
+                      stroke="none"
+                      fill="var(--color-chart-3, #f59e0b)"
+                      fillOpacity={0.15}
+                      connectNulls
+                      isAnimationActive={false}
                     />
                     <Area
                       type="monotone"
                       dataKey="arrivees"
                       name="Réel"
-                      stroke="hsl(var(--primary))"
+                      stroke="var(--color-primary)"
                       fill="url(#fc)"
                       strokeWidth={2}
+                      dot={false}
                     />
                     <Line
                       type="monotone"
                       dataKey="prevision"
                       name="Prévision"
-                      stroke="hsl(var(--accent, 38 92% 55%))"
+                      stroke="var(--color-chart-3, #f59e0b)"
                       strokeWidth={2}
                       strokeDasharray="5 4"
                       dot={false}
+                      connectNulls
                     />
-                  </AreaChart>
+                  </ComposedChart>
                 </ResponsiveContainer>
               </div>
               <dl className="mt-4 grid grid-cols-2 gap-3 text-sm">
@@ -285,8 +307,8 @@ function AssistantPage() {
                   </dd>
                 </div>
                 <div className="rounded-lg border border-border/50 bg-background/40 p-3">
-                  <dt className="text-xs text-muted-foreground">Fiabilité (R²)</dt>
-                  <dd className="font-display text-lg font-semibold">{forecast.r2}</dd>
+                  <dt className="text-xs text-muted-foreground">Erreur moyenne (MAPE)</dt>
+                  <dd className="font-display text-lg font-semibold">{forecast.mape} %</dd>
                 </div>
                 <div className="rounded-lg border border-border/50 bg-background/40 p-3">
                   <dt className="text-xs text-muted-foreground">Pente / mois</dt>
@@ -302,6 +324,35 @@ function AssistantPage() {
                   </dd>
                 </div>
               </dl>
+
+              <div className="mt-4 overflow-hidden rounded-lg border border-border/50">
+                <table className="w-full text-xs">
+                  <thead className="bg-background/50 text-muted-foreground">
+                    <tr>
+                      <th className="px-3 py-2 text-left font-medium">Mois</th>
+                      <th className="px-3 py-2 text-right font-medium">Prévision</th>
+                      <th className="px-3 py-2 text-right font-medium">Fourchette</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {forecast.forecast.map((f) => (
+                      <tr key={f.mois} className="border-t border-border/40">
+                        <td className="px-3 py-1.5">{f.mois}</td>
+                        <td className="px-3 py-1.5 text-right font-medium">
+                          {f.prevision?.toLocaleString("fr-FR")}
+                        </td>
+                        <td className="px-3 py-1.5 text-right text-muted-foreground">
+                          {f.bas?.toLocaleString("fr-FR")} – {f.haut?.toLocaleString("fr-FR")}
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+              <p className="mt-2 text-[11px] leading-relaxed text-muted-foreground">
+                Méthode : {forecast.methode}. Fiabilité tendance R² {forecast.r2}, RMSE{" "}
+                {forecast.rmse.toLocaleString("fr-FR")} véhicules/mois.
+              </p>
             </CardContent>
           </Card>
 
