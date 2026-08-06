@@ -111,7 +111,7 @@ function AssistantPage() {
             </div>
             <div>
               <h1 className="font-display text-lg font-semibold leading-none">
-                Marsa <span className="text-primary">AI</span>
+                Marsa <span className="text-primary">IA</span>
               </h1>
               <p className="mt-1 text-xs text-muted-foreground">
                 Analyste prédictif · entraîné sur {DATASET_SUMMARY.total.toLocaleString("fr-FR")} véhicules
