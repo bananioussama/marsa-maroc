@@ -146,13 +146,16 @@ function Panel({ title, subtitle, children, className = "", hint }: {
 }
 
 const tooltipStyle = {
-  backgroundColor: "oklch(0.22 0.035 260)",
-  border: "1px solid oklch(0.32 0.03 260)",
+  backgroundColor: "oklch(0.24 0.038 260)",
+  border: "1px solid oklch(0.38 0.03 260)",
   borderRadius: 12,
   color: "oklch(0.97 0.01 250)",
   fontSize: 12,
   boxShadow: "0 10px 30px -12px oklch(0.1 0.02 260 / 0.6)",
 };
+const tooltipLabelStyle = { color: "oklch(0.97 0.01 250)", fontWeight: 600 };
+const tooltipItemStyle = { color: "oklch(0.92 0.012 250)" };
+
 
 type Filters = {
   q: string; marque: string; modele: string; statut: string; etat: string;
