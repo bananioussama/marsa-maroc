@@ -78,7 +78,8 @@ export function buildForecast(horizon = 6) {
   // --- 4. Erreurs du modèle sur l'historique (MAPE + écart-type) ---
   let absPct = 0;
   let sqErr = 0;
-  values.forEach((y, i) => {
+  values.forEach((raw, i) => {
+    const y: number = raw;
     const monthNum = Number(String(months[i]).split("-")[1]);
     const pred = fitted[i] * (seasonal[monthNum] || 1);
     absPct += y === 0 ? 0 : Math.abs(y - pred) / y;
