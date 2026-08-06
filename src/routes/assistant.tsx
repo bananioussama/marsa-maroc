@@ -28,13 +28,13 @@ export const Route = createFileRoute("/assistant")({
   component: AssistantPage,
   head: () => ({
     meta: [
-      { title: "Marsa AI — Analyste prédictif du parc véhicules" },
+      { title: "Marsa IA — Analyste prédictif du parc véhicules" },
       {
         name: "description",
         content:
           "Agent IA entraîné sur 50 000 véhicules importés : prévisions du marché, analyses de stock, zones, navires et importateurs.",
       },
-      { property: "og:title", content: "Marsa AI — Analyste prédictif du parc véhicules" },
+      { property: "og:title", content: "Marsa IA — Analyste prédictif du parc véhicules" },
       {
         property: "og:description",
         content: "Posez vos questions à l'IA analyste du terminal voiturier Marsa Maroc.",
