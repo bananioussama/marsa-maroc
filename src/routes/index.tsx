@@ -373,8 +373,12 @@ Généré le : ${new Date().toLocaleString("fr-FR")}
       <header className="sticky top-0 z-30 border-b border-border/60 bg-background/80 backdrop-blur-xl">
         <div className="mx-auto flex max-w-[1440px] items-center justify-between gap-4 px-6 py-4">
           <div className="flex items-center gap-3">
-            <div className="relative rounded-xl bg-gradient-to-br from-primary to-primary/70 p-2.5 shadow-glow">
-              <Ship className="h-5 w-5 text-primary-foreground" />
+            <div className="relative flex h-11 w-11 items-center justify-center overflow-hidden rounded-xl bg-white p-1 shadow-elegant ring-1 ring-border/60">
+              <img
+                src={marsaLogo.url}
+                alt="Logo Marsa Maroc"
+                className="h-full w-full object-contain"
+              />
             </div>
             <div>
               <h1 className="font-display text-lg font-semibold leading-none">
