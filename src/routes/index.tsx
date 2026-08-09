@@ -18,6 +18,7 @@ import {
 } from "@/components/ui/select";
 import { getProjectSourceFiles } from "@/lib/download-project.functions";
 import JSZip from "jszip";
+import marsaLogo from "@/assets/marsa-maroc-logo.png.asset.json";
 
 export const Route = createFileRoute("/")({
   component: Dashboard,
