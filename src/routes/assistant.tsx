@@ -3,7 +3,7 @@ import { useChat } from "@ai-sdk/react";
 import { DefaultChatTransport, type UIMessage } from "ai";
 import { useEffect, useMemo, useRef, useState } from "react";
 import {
-  ArrowLeft, Bot, Brain, RefreshCw, Sparkle, TrendingUp,
+  ArrowLeft, Bot, RefreshCw, Sparkle, TrendingUp,
 } from "lucide-react";
 import {
   Area, CartesianGrid, ComposedChart, Line, ResponsiveContainer, Tooltip, XAxis, YAxis,
