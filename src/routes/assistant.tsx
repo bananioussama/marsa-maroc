@@ -21,6 +21,7 @@ import {
 import { Shimmer } from "@/components/ai-elements/shimmer";
 import { buildForecast } from "@/lib/forecast";
 import { DATASET_SUMMARY } from "@/lib/dataset-summary";
+import marsaLogo from "@/assets/marsa-maroc-logo.png.asset.json";
 
 const STORAGE_KEY = "marsa-ai-conversation";
 
