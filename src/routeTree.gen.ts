@@ -9,10 +9,22 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as VoiturerieRouteImport } from './routes/voiturerie'
+import { Route as ConteneursRouteImport } from './routes/conteneurs'
 import { Route as AssistantRouteImport } from './routes/assistant'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ApiChatRouteImport } from './routes/api/chat'
 
+const VoiturerieRoute = VoiturerieRouteImport.update({
+  id: '/voiturerie',
+  path: '/voiturerie',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ConteneursRoute = ConteneursRouteImport.update({
+  id: '/conteneurs',
+  path: '/conteneurs',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AssistantRoute = AssistantRouteImport.update({
   id: '/assistant',
   path: '/assistant',
@@ -32,35 +44,63 @@ const ApiChatRoute = ApiChatRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/assistant': typeof AssistantRoute
+  '/conteneurs': typeof ConteneursRoute
+  '/voiturerie': typeof VoiturerieRoute
   '/api/chat': typeof ApiChatRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/assistant': typeof AssistantRoute
+  '/conteneurs': typeof ConteneursRoute
+  '/voiturerie': typeof VoiturerieRoute
   '/api/chat': typeof ApiChatRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/assistant': typeof AssistantRoute
+  '/conteneurs': typeof ConteneursRoute
+  '/voiturerie': typeof VoiturerieRoute
   '/api/chat': typeof ApiChatRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/assistant' | '/api/chat'
+  fullPaths: '/' | '/assistant' | '/conteneurs' | '/voiturerie' | '/api/chat'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/assistant' | '/api/chat'
-  id: '__root__' | '/' | '/assistant' | '/api/chat'
+  to: '/' | '/assistant' | '/conteneurs' | '/voiturerie' | '/api/chat'
+  id:
+    | '__root__'
+    | '/'
+    | '/assistant'
+    | '/conteneurs'
+    | '/voiturerie'
+    | '/api/chat'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AssistantRoute: typeof AssistantRoute
+  ConteneursRoute: typeof ConteneursRoute
+  VoiturerieRoute: typeof VoiturerieRoute
   ApiChatRoute: typeof ApiChatRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/voiturerie': {
+      id: '/voiturerie'
+      path: '/voiturerie'
+      fullPath: '/voiturerie'
+      preLoaderRoute: typeof VoiturerieRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/conteneurs': {
+      id: '/conteneurs'
+      path: '/conteneurs'
+      fullPath: '/conteneurs'
+      preLoaderRoute: typeof ConteneursRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/assistant': {
       id: '/assistant'
       path: '/assistant'
@@ -88,6 +128,8 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AssistantRoute: AssistantRoute,
+  ConteneursRoute: ConteneursRoute,
+  VoiturerieRoute: VoiturerieRoute,
   ApiChatRoute: ApiChatRoute,
 }
 export const routeTree = rootRouteImport

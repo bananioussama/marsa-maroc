@@ -136,7 +136,7 @@ function AssistantPage() {
               <RefreshCw className="h-4 w-4" /> Nouvelle discussion
             </Button>
             <Button asChild variant="outline" size="sm" className="gap-2">
-              <Link to="/">
+              <Link to="/voiturerie">
                 <ArrowLeft className="h-4 w-4" /> Tableau de bord
               </Link>
             </Button>
