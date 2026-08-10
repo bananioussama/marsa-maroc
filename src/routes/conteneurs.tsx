@@ -227,14 +227,13 @@ function ContainersDashboard() {
     const rehandles = fMoves.reduce((s, m) => s + m.rehandle, 0);
     const restows = fUnits.filter((u) => u.restow === "Yes").length;
     const qcMoves = fMoves.filter((m) => m.crane.startsWith("QC"));
-    const hours = new Set(qcMoves.map((m) => m.time.slice(0, 13))).size || 1;
-    const cranes = new Set(qcMoves.map((m) => m.crane)).size || 1;
+    const craneHours = new Set(qcMoves.map((m) => `${m.crane}|${m.time.slice(0, 13)}`)).size || 1;
     return {
       teu, inYard, reefers, holds, full,
       dwell: dwell / 24,
       rehandleRate: fMoves.length ? (rehandles / fMoves.length) * 100 : 0,
       restowRate: fUnits.length ? (restows / fUnits.length) * 100 : 0,
-      gmph: qcMoves.length / (hours * cranes),
+      gmph: qcMoves.length / craneHours,
       moves: fMoves.length,
       mr: fUnits.filter((u) => u.mr !== "Clear").length,
     };
