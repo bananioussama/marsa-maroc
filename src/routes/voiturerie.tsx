@@ -3,7 +3,7 @@ import { useServerFn } from "@tanstack/react-start";
 import { useEffect, useMemo, useState } from "react";
 import {
   Car, PackageCheck, Warehouse, Clock, TrendingUp, Filter, Search,
-  Anchor, X, ShieldAlert, Wrench, MapPin, Factory, Download, Brain,
+  Anchor, X, ShieldAlert, Wrench, MapPin, Factory, Download, Brain, Home,
 } from "lucide-react";
 import {
   BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid,
@@ -389,6 +389,7 @@ Généré le : ${new Date().toLocaleString("fr-FR")}
             </div>
           </div>
           <div className="hidden items-center gap-2 md:flex">
+            <Button asChild variant="outline" className="h-9 gap-2"><Link to="/"><Home className="h-4 w-4" />Accueil</Link></Button>
             <Badge variant="outline" className="border-success/40 bg-success/10 text-success">
               <span className="mr-1.5 inline-block h-1.5 w-1.5 animate-pulse rounded-full bg-success" />
               Système actif
