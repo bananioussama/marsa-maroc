@@ -2,7 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useMemo, useState } from "react";
 import {
   Container, Ship, Timer, Layers, Snowflake, ShieldAlert, Wrench as Crane, X,
-  ArrowLeftRight, Anchor, Search, Filter, Home, Repeat, Package,
+  ArrowLeftRight, Anchor, Search, Filter, Home, Repeat, Package, Brain,
 } from "lucide-react";
 import {
   BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid,
