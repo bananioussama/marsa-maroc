@@ -379,7 +379,7 @@ function ContainersDashboard() {
                   value={f[key] || "all"}
                   onValueChange={(v) => setF((p) => ({ ...p, [key]: v === "all" ? "" : v }))}
                 >
-                  <SelectTrigger className="h-10 w-[150px]">
+                  <SelectTrigger className="h-11 w-[190px] [&>span]:truncate">
                     <SelectValue placeholder={label} />
                   </SelectTrigger>
                   <SelectContent>
