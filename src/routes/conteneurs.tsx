@@ -329,6 +329,9 @@ function ContainersDashboard() {
               <span className="mr-1.5 inline-block h-1.5 w-1.5 animate-pulse rounded-full bg-success" />
               Temps réel
             </Badge>
+            <Button asChild className="h-9 gap-2">
+              <Link to="/assistant"><Brain className="h-4 w-4" />Marsa IA</Link>
+            </Button>
             <Button asChild variant="outline" className="h-9 gap-2">
               <Link to="/"><Home className="h-4 w-4" />Accueil</Link>
             </Button>
