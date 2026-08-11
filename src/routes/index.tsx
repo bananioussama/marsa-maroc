@@ -118,27 +118,25 @@ function Home() {
           />
         </section>
 
-        <section className="mt-8 grid gap-4 sm:grid-cols-3">
+        <section className="mt-8 grid gap-4 md:grid-cols-3">
           {[
-            { icon: Brain, title: "Marsa IA", text: "Agent prédictif entraîné sur vos données, prévisions à 6 mois.", to: "/assistant" },
-            { icon: Ship, title: "Vue quai", text: "Escales, postes à quai et cadence des grues en un coup d'œil." },
-            { icon: Layers, title: "Analyse TEU", text: "Volumes équivalent vingt pieds et occupation des blocs." },
+            { icon: Brain, title: "Marsa IA", text: "Agent prédictif entraîné sur vos données, prévisions à 6 mois et réponses en langage naturel.", to: "/assistant" },
+            { icon: Ship, title: "Vue quai", text: "Escales, postes à quai et cadence des grues en un coup d'œil.", to: "/conteneurs" },
+            { icon: Layers, title: "Analyse TEU", text: "Volumes équivalent vingt pieds, occupation des blocs et performance terminal.", to: "/conteneurs" },
           ].map((c) => {
             const Inner = (
-              <div className="flex h-full items-start gap-3 rounded-2xl border border-border/60 bg-surface-gradient p-5 shadow-elegant transition-colors hover:border-primary/40">
-                <div className="rounded-xl bg-primary/10 p-2.5 text-primary ring-1 ring-primary/20">
-                  <c.icon className="h-4 w-4" />
+              <div className="flex h-full items-start gap-4 rounded-2xl border border-border/60 bg-surface-gradient p-6 shadow-elegant transition-all hover:border-primary/40 hover:-translate-y-0.5">
+                <div className="shrink-0 rounded-xl bg-primary/10 p-3 text-primary ring-1 ring-primary/20">
+                  <c.icon className="h-5 w-5" />
                 </div>
-                <div>
-                  <p className="text-sm font-semibold">{c.title}</p>
-                  <p className="mt-1 text-xs leading-relaxed text-muted-foreground">{c.text}</p>
+                <div className="min-w-0">
+                  <p className="text-base font-semibold">{c.title}</p>
+                  <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">{c.text}</p>
                 </div>
               </div>
             );
-            return c.to ? (
+            return (
               <Link key={c.title} to={c.to}>{Inner}</Link>
-            ) : (
-              <div key={c.title}>{Inner}</div>
             );
           })}
         </section>
