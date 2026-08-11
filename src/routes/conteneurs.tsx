@@ -356,13 +356,13 @@ function ContainersDashboard() {
         <Card className="border-border/60 bg-surface-gradient shadow-elegant">
           <CardContent className="space-y-3 p-5">
             <div className="flex flex-wrap items-center gap-3">
-              <div className="relative min-w-[220px] flex-1">
+              <div className="relative min-w-[300px] flex-1">
                 <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
                 <Input
                   value={q}
                   onChange={(e) => setQ(e.target.value)}
-                  placeholder="Rechercher un numéro de conteneur…"
-                  className="h-10 pl-9"
+                  placeholder="Rechercher un conteneur…"
+                  className="h-11 pl-9"
                 />
               </div>
               {([
