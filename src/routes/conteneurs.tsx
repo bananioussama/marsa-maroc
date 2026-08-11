@@ -392,7 +392,7 @@ function ContainersDashboard() {
               ))}
               <Button
                 variant="ghost"
-                className="h-10 gap-2 text-muted-foreground"
+                className="h-11 gap-2 text-muted-foreground"
                 onClick={() => { setF(EMPTY); setQ(""); }}
               >
                 <Filter className="h-4 w-4" />Réinitialiser
