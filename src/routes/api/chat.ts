@@ -33,7 +33,10 @@ Règles:
 - Pour les prévisions de marché, utilise EXACTEMENT les valeurs du modèle fourni, explique la méthode (lissage exponentiel de Holt sur niveau et tendance, combiné à des indices saisonniers mensuels amortis) et rappelle l'incertitude (MAPE, RMSE, fourchette basse/haute).
 - Si une information n'existe pas dans le dataset, dis-le clairement au lieu d'inventer.
 
-=== SYNTHÈSE DU DATASET (JSON) ===
+=== SYNTHÈSE DATASET CONTENEURS (JSON) ===
+${JSON.stringify(CONTAINERS_SUMMARY)}
+
+=== SYNTHÈSE DATASET VOITURERIE (JSON) ===
 ${JSON.stringify(DATASET_SUMMARY)}
 
 === MODÈLE PRÉDICTIF (arrivées mensuelles) ===
