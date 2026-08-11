@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { convertToModelMessages, streamText, type UIMessage } from "ai";
 import { createLovableAiGatewayProvider, getLovableAiGatewayRunId } from "@/lib/ai-gateway.server";
 import { DATASET_SUMMARY } from "@/lib/dataset-summary";
+import { CONTAINERS_SUMMARY } from "@/lib/containers-summary";
 import { buildForecast } from "@/lib/forecast";
 
 type ChatRequestBody = { messages?: unknown };
@@ -21,8 +22,10 @@ export const Route = createFileRoute("/api/chat")({
         }
 
         const forecast = buildForecast(6);
-        const system = `Tu es "Marsa IA", l'analyste IA du terminal voiturier Marsa Maroc (Tanger Med).
-Tu réponds UNIQUEMENT à partir du jeu de données réel ci-dessous (50 000 véhicules importés, année 2025).
+        const system = `Tu es "Marsa IA", l'analyste IA de Marsa Maroc (Tanger Med). Tu couvres DEUX départements :
+1) Voiturerie : 50 000 véhicules importés (année 2025).
+2) Conteneurs : terminal à conteneurs (8 000 conteneurs, 13 161 mouvements) — TEU, dwell time, blocs, engins (QC/RTG), navires, postes à quai, reefers, holds douane, rehandles.
+Tu réponds UNIQUEMENT à partir des jeux de données réels ci-dessous. Identifie le département concerné par la question et utilise la bonne synthèse ; si la question est transverse, compare les deux.
 Règles:
 - Réponds en français, de façon claire, chiffrée et professionnelle.
 - Cite toujours les chiffres exacts du dataset (nombres, pourcentages, moyennes).
@@ -30,7 +33,10 @@ Règles:
 - Pour les prévisions de marché, utilise EXACTEMENT les valeurs du modèle fourni, explique la méthode (lissage exponentiel de Holt sur niveau et tendance, combiné à des indices saisonniers mensuels amortis) et rappelle l'incertitude (MAPE, RMSE, fourchette basse/haute).
 - Si une information n'existe pas dans le dataset, dis-le clairement au lieu d'inventer.
 
-=== SYNTHÈSE DU DATASET (JSON) ===
+=== SYNTHÈSE DATASET CONTENEURS (JSON) ===
+${JSON.stringify(CONTAINERS_SUMMARY)}
+
+=== SYNTHÈSE DATASET VOITURERIE (JSON) ===
 ${JSON.stringify(DATASET_SUMMARY)}
 
 === MODÈLE PRÉDICTIF (arrivées mensuelles) ===

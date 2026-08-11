@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { Car, Container, ArrowRight, Anchor, Brain, Ship, Layers } from "lucide-react";
+import { Car, Container, ArrowRight, Anchor, Brain } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import marsaLogo from "@/assets/marsa-maroc-logo.png.asset.json";
 
@@ -118,11 +118,9 @@ function Home() {
           />
         </section>
 
-        <section className="mt-8 grid gap-4 md:grid-cols-3">
+        <section className="mt-8">
           {[
-            { icon: Brain, title: "Marsa IA", text: "Agent prédictif entraîné sur vos données, prévisions à 6 mois et réponses en langage naturel.", to: "/assistant" },
-            { icon: Ship, title: "Vue quai", text: "Escales, postes à quai et cadence des grues en un coup d'œil.", to: "/conteneurs" },
-            { icon: Layers, title: "Analyse TEU", text: "Volumes équivalent vingt pieds, occupation des blocs et performance terminal.", to: "/conteneurs" },
+            { icon: Brain, title: "Marsa IA", text: "Agent prédictif entraîné sur vos données véhicules et conteneurs, prévisions à 6 mois et réponses en langage naturel.", to: "/assistant" },
           ].map((c) => {
             const Inner = (
               <div className="flex h-full items-start gap-4 rounded-2xl border border-border/60 bg-surface-gradient p-6 shadow-elegant transition-all hover:border-primary/40 hover:-translate-y-0.5">
