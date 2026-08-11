@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { Car, Container, ArrowRight, Anchor, Brain, Ship, Layers } from "lucide-react";
+import { Car, Container, ArrowRight, Anchor, Brain } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import marsaLogo from "@/assets/marsa-maroc-logo.png.asset.json";
 
