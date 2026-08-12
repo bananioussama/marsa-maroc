@@ -118,10 +118,12 @@ function Home() {
           />
         </section>
 
-        <section className="mt-8">
+        <section className="mt-8 grid gap-4 md:grid-cols-2">
           {[
             { icon: Brain, title: "Marsa IA", text: "Agent prédictif entraîné sur vos données véhicules et conteneurs, prévisions à 6 mois et réponses en langage naturel.", to: "/assistant" },
+            { icon: Anchor, title: "Live Container Tracking", text: "Centre de contrôle temps réel : jumeau numérique 2D du terminal, parcours conteneur navire → gate, anomalies et rapports.", to: "/tracking" },
           ].map((c) => {
+
             const Inner = (
               <div className="flex h-full items-start gap-4 rounded-2xl border border-border/60 bg-surface-gradient p-6 shadow-elegant transition-all hover:border-primary/40 hover:-translate-y-0.5">
                 <div className="shrink-0 rounded-xl bg-primary/10 p-3 text-primary ring-1 ring-primary/20">
