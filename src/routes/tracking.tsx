@@ -2,7 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useMemo, useRef, useState } from "react";
 import {
   Activity, AlertTriangle, Anchor, Boxes, Brain, Clock, Container as ContainerIcon,
-  FileText, Gauge, Home, Pause, Play, RefreshCw, Route as RouteIcon, Search, Ship, Truck, X,
+  FileText, Home, Pause, Play, RefreshCw, Route as RouteIcon, Search, Truck, X,
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -664,5 +664,3 @@ function ReportModal({ journey, onClose }: { journey: Journey; onClose: () => vo
     </div>
   );
 }
-
-export { Ship, Gauge };
